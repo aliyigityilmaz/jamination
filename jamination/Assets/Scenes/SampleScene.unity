@@ -502,7 +502,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be23d18c64673bc4b910934077882daa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canUseHeadBob: 1
   walkSpeed: 3
   gravity: 30
   lookSpeedX: 2
@@ -511,6 +510,14 @@ MonoBehaviour:
   lowerLookLimit: 80
   walkBobSpeed: 10
   walkBobAmount: 0.075
+  interactionRayPoint: {x: 0.5, y: 0.5, z: 0}
+  interactableLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  interactionRange: 2
+  baseStepSpeed: 0.5
+  footStepAudioSource: {fileID: 0}
+  woodClips: []
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0

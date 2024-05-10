@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class AImain : MonoBehaviour
 {
+    //Trigger için
     public Transform Following;
     public static bool FollowCheck= true;
     public float speed = 5f;
+
+    
+
+    
 
     private void Update()
     {
@@ -20,7 +25,7 @@ public class AImain : MonoBehaviour
         }
     }
 
-
+    
 
 
 }

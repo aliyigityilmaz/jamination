@@ -1,13 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
     public bool CanMove { get; private set; } = true;
 
-    [SerializeField]
-    private bool canUseHeadBob = true;
+    private bool CanInteract = true;
+    private bool useFootStepSounds = true;
 
     [Header("Movement Parameters")]
     [SerializeField] private float walkSpeed = 3.0f;
@@ -33,6 +35,18 @@ public class PlayerMovement : MonoBehaviour
 
     private float rotationX = 0;
 
+    [Header("Interaction")]
+    [SerializeField] private Vector3 interactionRayPoint = default;
+    [SerializeField] private LayerMask interactableLayer = default;
+    [SerializeField] private float interactionRange = default;
+    private Interactable currentInteractable;
+
+    [Header("Footstep Sounds")]
+    [SerializeField] private float baseStepSpeed = 0.5f;
+    [SerializeField] private AudioSource footStepAudioSource =default;
+    [SerializeField] private AudioClip[] woodClips = default;
+    private float footStepTimer = 0;
+
     private void Awake()
     {
         playerCamera = GetComponentInChildren<Camera>();
@@ -49,6 +63,69 @@ public class PlayerMovement : MonoBehaviour
             GetInput();
             Move();
             Look();
+
+            if (CanInteract)
+            {
+                HandleInteractionCheck();
+                HandleInteractionInput();
+            }
+            if (useFootStepSounds)
+            {
+                HandleFoodSteps();
+            }
+        }
+    }
+
+    private void HandleFoodSteps()
+    {
+        if (!controller.isGrounded) return;
+        if (currentInput == Vector2.zero) return;
+
+        footStepTimer -= Time.deltaTime;
+
+        if (footStepTimer <= 0)
+        {
+            if(Physics.Raycast(playerCamera.transform.position, Vector3.down, out RaycastHit hit, 3))
+            {
+                switch(hit.collider.tag)
+                {
+                    case "Wood":
+                        footStepAudioSource.PlayOneShot(woodClips[UnityEngine.Random.Range(0, woodClips.Length -1)]);
+                        footStepTimer = baseStepSpeed;
+                        break;
+                }
+            }
+            footStepTimer = baseStepSpeed;
+        }
+    }
+
+
+    private void HandleInteractionCheck()
+    {
+        if(Physics.Raycast(playerCamera.ViewportPointToRay(interactionRayPoint), out RaycastHit hit, interactionRange))
+        {
+            if(hit.collider.gameObject.layer == 9 && (currentInteractable == null || hit.collider.gameObject.GetInstanceID() != currentInteractable.GetInstanceID()))
+            {
+                hit.collider.TryGetComponent(out currentInteractable);
+
+                if(currentInteractable != null)
+                {
+                    currentInteractable.OnFocus();
+                }
+            }
+        }
+        else if(currentInteractable != null)
+        {
+            currentInteractable.OnLoseFocus();
+            currentInteractable = null;
+        }
+    }
+
+    private void HandleInteractionInput()
+    {
+        if(Input.GetKeyDown(KeyCode.E) && currentInteractable != null && Physics.Raycast(playerCamera.ViewportPointToRay(interactionRayPoint), out RaycastHit hit, interactionRange, interactableLayer))
+        {
+            currentInteractable.OnInteract();
         }
     }
 
@@ -89,4 +166,6 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
+
+    
 }

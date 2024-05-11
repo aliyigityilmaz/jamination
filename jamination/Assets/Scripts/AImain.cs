@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.AI;
 public class AImain : MonoBehaviour
 {
     //Trigger için
@@ -9,19 +9,20 @@ public class AImain : MonoBehaviour
     public static bool FollowCheck= true;
     public float speed = 5f;
 
-    
-
-    
+    public NavMeshAgent agent;
 
     private void Update()
     {
         if (FollowCheck && Following != null)
         {
-            Vector3 dogruvektor = Following.position - transform.position;
 
-            Vector3 hýzvektor = dogruvektor.normalized * speed * Time.deltaTime;
+            agent.SetDestination(Following.position);
 
-            transform.position += hýzvektor;
+            //Vector3 dogruvektor = Following.position - transform.position;
+
+            //Vector3 hýzvektor = dogruvektor.normalized * speed * Time.deltaTime;
+
+            //transform.position += hýzvektor;
         }
     }
 

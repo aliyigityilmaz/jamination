@@ -9,6 +9,7 @@ TagManager:
   - Pos/Door
   - Pos/Room
   - UI/ProgressBar
+  - Spawn
   layers:
   - Default
   - TransparentFX

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &3710118700827231541
+--- !u!1001 &6617764732537040760
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,43 +10,28 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: b727d84bedf61374897c11dc9bc23325,
         type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: b727d84bedf61374897c11dc9bc23325,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: b727d84bedf61374897c11dc9bc23325,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: b727d84bedf61374897c11dc9bc23325,
-        type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 28.439608
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b727d84bedf61374897c11dc9bc23325,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.45238522
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b727d84bedf61374897c11dc9bc23325,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.2072258
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b727d84bedf61374897c11dc9bc23325,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071067
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b727d84bedf61374897c11dc9bc23325,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b727d84bedf61374897c11dc9bc23325,
         type: 3}
@@ -56,7 +41,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: b727d84bedf61374897c11dc9bc23325,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b727d84bedf61374897c11dc9bc23325,
         type: 3}
@@ -86,5 +71,30 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b727d84bedf61374897c11dc9bc23325,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 102123299763942783}
   m_SourcePrefab: {fileID: 100100000, guid: b727d84bedf61374897c11dc9bc23325, type: 3}
+--- !u!1 &6275322049270862377 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: b727d84bedf61374897c11dc9bc23325,
+    type: 3}
+  m_PrefabInstance: {fileID: 6617764732537040760}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &102123299763942783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6275322049270862377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3669a65942cb74c43943fe78fab0764a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  progressBar: {fileID: 0}
+  particle: {fileID: 3465583591417022093, guid: 435be5f58e1923543a6a9e9942bf8ee0,
+    type: 3}

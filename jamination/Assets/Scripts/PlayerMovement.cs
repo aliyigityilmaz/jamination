@@ -124,9 +124,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleInteractionInput()
     {
-        if(Input.GetKeyDown(KeyCode.E) && currentInteractable != null && Physics.Raycast(playerCamera.ViewportPointToRay(interactionRayPoint), out RaycastHit hit, interactionRange, interactableLayer))
+        if (Input.GetKeyDown(KeyCode.E) && currentInteractable != null && Physics.Raycast(playerCamera.ViewportPointToRay(interactionRayPoint), out RaycastHit hit, interactionRange, interactableLayer))
         {
             currentInteractable.OnInteract();
+        }
+        else if (Input.GetKey(KeyCode.E) && currentInteractable != null && Physics.Raycast(playerCamera.ViewportPointToRay(interactionRayPoint), out RaycastHit hit1, interactionRange, interactableLayer))
+        {
+            currentInteractable.OnHoldInteract();
         }
     }
 

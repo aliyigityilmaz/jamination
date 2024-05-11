@@ -85,14 +85,15 @@ public class PlayerMovement : MonoBehaviour
 
         if (footStepTimer <= 0)
         {
-            if(Physics.Raycast(playerCamera.transform.position, Vector3.down, out RaycastHit hit, 3))
+            if(Physics.Raycast(gameObject.transform.position, Vector3.down, out RaycastHit hit, 3))
             {
-                switch(hit.collider.tag)
+                if(hit.collider.tag == "Wood")
                 {
-                    case "Wood":
-                        footStepAudioSource.PlayOneShot(woodClips[UnityEngine.Random.Range(0, woodClips.Length -1)]);
-                        footStepTimer = baseStepSpeed;
-                        break;
+                    
+                    footStepAudioSource.PlayOneShot(woodClips[UnityEngine.Random.Range(0, woodClips.Length -1)]);
+                    footStepTimer = baseStepSpeed;
+                    Debug.Log("Walking on wood");
+                     
                 }
             }
             footStepTimer = baseStepSpeed;

@@ -20,10 +20,11 @@ public class DemonMaskBehaviour : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player");
         agent = GetComponent<NavMeshAgent>();
-    }
 
-    private void OnEnable()
-    {
+        hallPosition = GameObject.FindWithTag("Pos/Hall").transform;
+        doorPosition = GameObject.FindWithTag("Pos/Door").transform;
+        roomPosition = GameObject.FindWithTag("Pos/Room").transform;
+
         agent.SetDestination(hallPosition.position);
         StartCoroutine(GoToDoor());
     }
@@ -55,7 +56,7 @@ public class DemonMaskBehaviour : MonoBehaviour
             if (Vector3.Distance(transform.position, roomPosition.transform.position) < 1)
             {
                 //player dolapta deðilse
-                if(true)
+                if(false)
                 {
                     agent.SetDestination(player.transform.position);
                     if (Vector3.Distance(transform.position, player.transform.position) < 1)
@@ -83,6 +84,7 @@ public class DemonMaskBehaviour : MonoBehaviour
         agent.SetDestination(hallPosition.position);
         if(agent != null)
         {
+            GameObject.FindWithTag("Spawn").GetComponent<Spawn>().spawned = false;
             Destroy(gameObject, 10f);
         }
     }

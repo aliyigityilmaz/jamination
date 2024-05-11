@@ -5,31 +5,37 @@ using UnityEngine;
 public class Spawn : MonoBehaviour
 {
     //Instantiate için 
-    public GameObject canavarPrefab;
-    public Transform spawnNoktasý;
+    public GameObject demonMaskPrefab;
+    public Transform spawnPos;
     public float spawnGecikmesi = 3f; //spawn süresi 
 
+    public bool spawned;
+
     //Transform için
-    public Transform PlayerTransform;
-    public AImain canavar;
     void Start()
     {
         //canavarýn karakteri bulmasý için
-        canavar.Following = PlayerTransform;
 
         // Eðer spawn noktasý belirtilmemiþse, bu script çalýþmayý sonlandýr.
-        if (spawnNoktasý == null)
+        if (spawnPos == null)
         {
             Debug.LogError("Spawn noktasý belirtilmedi!");
             return;
         }
 
-        // Belirtilen süre sonunda canavarý spawnlamak için 
-        Invoke("CanavarSpawnla", spawnGecikmesi);
     }
     void CanavarSpawnla()
     {
-        Instantiate(canavarPrefab, spawnNoktasý.position, spawnNoktasý.rotation);
+        Instantiate(demonMaskPrefab, spawnPos.position, spawnPos.rotation);
+    }
+
+    private void Update()
+    {
+        if (!spawned)
+        {
+            spawned = true;
+            Invoke("CanavarSpawnla", spawnGecikmesi);
+        }
     }
 
 }

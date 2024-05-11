@@ -31,7 +31,7 @@ public class DemonMaskBehaviour : MonoBehaviour
 
     IEnumerator GoToDoor()
     {
-        yield return new WaitForSeconds(15);
+        yield return new WaitForSeconds(5);
         agent.SetDestination(doorPosition.position);
     }
 
@@ -74,7 +74,7 @@ public class DemonMaskBehaviour : MonoBehaviour
 
     IEnumerator GoToRoom()
     {
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(5);
         agent.SetDestination(roomPosition.position);
     }
 
@@ -84,9 +84,12 @@ public class DemonMaskBehaviour : MonoBehaviour
         agent.SetDestination(hallPosition.position);
         if(agent != null)
         {
-            GameObject.FindWithTag("Spawn").GetComponent<Spawn>().spawned = false;
             Destroy(gameObject, 10f);
         }
+    }
+    private void OnDestroy()
+    {
+        GameObject.FindWithTag("Spawn").GetComponent<Spawn>().spawned = false;
     }
 
 }

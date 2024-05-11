@@ -7,10 +7,9 @@ public class Spawn : MonoBehaviour
     //Instantiate için 
     public GameObject demonMaskPrefab;
     public Transform spawnPos;
-    public float spawnGecikmesi = 3f; //spawn süresi 
 
     public bool spawned;
-
+    private GameObject instanceObject;
     //Transform için
     void Start()
     {
@@ -26,7 +25,7 @@ public class Spawn : MonoBehaviour
     }
     void CanavarSpawnla()
     {
-        Instantiate(demonMaskPrefab, spawnPos.position, spawnPos.rotation);
+        instanceObject = Instantiate(demonMaskPrefab, spawnPos.position, spawnPos.rotation);
     }
 
     private void Update()
@@ -34,7 +33,11 @@ public class Spawn : MonoBehaviour
         if (!spawned)
         {
             spawned = true;
-            Invoke("CanavarSpawnla", spawnGecikmesi);
+            CanavarSpawnla();
+        }
+        if (spawned && instanceObject == null)
+        {
+            spawned = false;
         }
     }
 

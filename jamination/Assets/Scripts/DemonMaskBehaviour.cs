@@ -15,6 +15,7 @@ public class DemonMaskBehaviour : MonoBehaviour
     [SerializeField] private Transform doorPosition;
     [SerializeField] private Transform roomPosition;
 
+    private bool chasePlayer;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +26,7 @@ public class DemonMaskBehaviour : MonoBehaviour
         doorPosition = GameObject.FindWithTag("Pos/Door").transform;
         roomPosition = GameObject.FindWithTag("Pos/Room").transform;
 
+        chasePlayer = false;
         agent.SetDestination(hallPosition.position);
         StartCoroutine(GoToDoor());
     }
@@ -56,17 +58,22 @@ public class DemonMaskBehaviour : MonoBehaviour
             if (Vector3.Distance(transform.position, roomPosition.transform.position) < 1)
             {
                 //player dolapta deðilse
-                if(false)
+                if(!GameObject.Find("DolapCollider").GetComponent<WardrobeScript>().isPlayerInside)
                 {
-                    agent.SetDestination(player.transform.position);
-                    if (Vector3.Distance(transform.position, player.transform.position) < 1)
-                    {
-                        //oyunu bitir
-                    }
+                    chasePlayer = true;
                 }
-                else
+                else if(GameObject.Find("DolapCollider").GetComponent<WardrobeScript>().isPlayerInside && chasePlayer == false)
                 {
                     StartCoroutine(GoBack());
+                }
+            }
+
+            if(chasePlayer)
+            {
+                agent.SetDestination(player.transform.position);
+                if (Vector3.Distance(transform.position, player.transform.position) < 1)
+                {
+                    //oyunu bitir
                 }
             }
         }
@@ -86,10 +93,6 @@ public class DemonMaskBehaviour : MonoBehaviour
         {
             Destroy(gameObject, 10f);
         }
-    }
-    private void OnDestroy()
-    {
-        GameObject.FindWithTag("Spawn").GetComponent<Spawn>().spawned = false;
     }
 
 }

@@ -35,7 +35,6 @@ public class Flashlight : MonoBehaviour
 
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (isOff && Input.GetKeyDown(KeyCode.F) && currentBatteryLevel > 0)

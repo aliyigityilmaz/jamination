@@ -92,7 +92,7 @@ public class PlayerMovement : MonoBehaviour
                     
                     footStepAudioSource.PlayOneShot(woodClips[UnityEngine.Random.Range(0, woodClips.Length -1)]);
                     footStepTimer = baseStepSpeed;
-                    Debug.Log("Walking on wood");
+                    //Debug.Log("Walking on wood");
                      
                 }
             }

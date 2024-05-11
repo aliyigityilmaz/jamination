@@ -58,11 +58,11 @@ public class DemonMaskBehaviour : MonoBehaviour
             if (Vector3.Distance(transform.position, roomPosition.transform.position) < 1)
             {
                 //player dolapta deðilse
-                if(!GameObject.Find("DolapCollider").GetComponent<WardrobeScript>().isPlayerInside)
+                if(!GameObject.Find("Kapak").GetComponent<WardrobeScript>().isPlayerInside)
                 {
                     chasePlayer = true;
                 }
-                else if(GameObject.Find("DolapCollider").GetComponent<WardrobeScript>().isPlayerInside && chasePlayer == false)
+                else if(GameObject.Find("Kapak").GetComponent<WardrobeScript>().isPlayerInside && chasePlayer == false)
                 {
                     StartCoroutine(GoBack());
                 }

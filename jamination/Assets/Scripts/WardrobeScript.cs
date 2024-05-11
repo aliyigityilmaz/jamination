@@ -1,20 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class WardrobeScript : MonoBehaviour
+public class WardrobeScript : Interactable
 {
+
+    public Animator OpenAnim;
+    private bool Kapak = false;
+    public GameObject player;
+    public Vector3 InWardrob;
+
     public bool isPlayerInside;
-    // Start is called before the first frame update
+
     void Start()
     {
         
     }
-
-    // Update is called once per frame
     void Update()
     {
-        
+
+        if(Kapak == true)
+        {
+            OpenAnim.SetBool("DolapBool", false);
+        }
+
+    }
+
+    public override void OnInteract()
+    {
+        OpenAnim.SetBool("DolapBool", true);
+        Kapak = true;
+        player.isStatic = true;
+        player.transform.position = InWardrob;
+
     }
 
     private void OnTriggerEnter(Collider collision)
@@ -31,5 +50,20 @@ public class WardrobeScript : MonoBehaviour
         {
             isPlayerInside = false;
         }
+    }
+
+    public override void OnFocus()
+    {
+
+    }
+
+    public override void OnHoldInteract()
+    {
+ 
+    }
+
+    public override void OnLoseFocus()
+    {
+
     }
 }

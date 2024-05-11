@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class Flashlight : MonoBehaviour
 {
@@ -15,19 +17,30 @@ public class Flashlight : MonoBehaviour
     private bool isOn;
     [SerializeField]
     private bool isOff;
-    
+
+    [Header("Battery")]
+    public float maxBatteryLevel = 100f;
+    public float batteryDrainRate = 0.5f; // Birim: birim/saniye
+    private float currentBatteryLevel;
+
+    public Image batteryIndicator;
+
     void Start()
     {
         isOff = true;
         flashlight.SetActive(false);
+
+        currentBatteryLevel = maxBatteryLevel;
+        UpdateBatteryIndicator();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isOff && Input.GetKeyDown(KeyCode.F))
+        if (isOff && Input.GetKeyDown(KeyCode.F) && currentBatteryLevel > 0)
         {
-               flashlight.SetActive(true);
+            flashlight.SetActive(true);
             turnOn.Play();
             isOn = true;
             isOff = false;
@@ -39,5 +52,22 @@ public class Flashlight : MonoBehaviour
             isOff = true;
             flashlight.SetActive(false);
         }
+        if (isOn && currentBatteryLevel > 0)
+        {
+            currentBatteryLevel -= batteryDrainRate * Time.deltaTime;
+            UpdateBatteryIndicator();
+
+            if (currentBatteryLevel <= 0)
+            {
+                flashlight.SetActive(false);
+                isOn = false;
+                isOff = true;
+            }
+        }
+    }
+    void UpdateBatteryIndicator()
+    {
+        float fillAmount = currentBatteryLevel / maxBatteryLevel;
+        batteryIndicator.fillAmount = fillAmount;
     }
 }

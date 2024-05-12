@@ -55,32 +55,32 @@ public class DemonMaskBehaviour : MonoBehaviour
     {
         if (AnimDoor.GetBool("DoorBool") == true)
         {
-            agent.SetDestination(doorPosition.position);
+            goingToDoor = true; goingToHall = false; goingToRoom = false;
             if (Vector3.Distance(this.gameObject.transform.position, doorPosition.transform.position) < 3)
             {
+                
                 timer += Time.deltaTime;
                 Debug.Log(timer);
                 if (timer > 5)
                 {
-                    agent.SetDestination(roomPosition.position);
+                    goingToRoom = true; goingToDoor = false; goingToHall = false;
                     
                 }
             }
         }
         else
         {
-            timer = 0;
-            agent.SetDestination(hallPosition.position);
+            goingToHall = true; goingToDoor = false; goingToRoom = false;
             door.GetComponent<DoorScript>().isOpened = false;
         }
 
         if (Vector3.Distance(transform.position, roomPosition.transform.position) < 2)
         {
-            timer = 0;
+           timer = 0;
             //player dolapta deðilse
             if (!GameObject.Find("Kapak").GetComponent<WardrobeScript>().isPlayerInside)
             {
-                chasePlayer = true;
+                chasePlayer = true; goingToRoom = false; goingToDoor = false; goingToHall = false;
             }
             else if (GameObject.Find("Kapak").GetComponent<WardrobeScript>().isPlayerInside && chasePlayer == false)
             {
@@ -88,13 +88,9 @@ public class DemonMaskBehaviour : MonoBehaviour
                 door.GetComponent<DoorScript>().isOpened = false;
             }
         }
-        if (chasePlayer)
+        if (Vector3.Distance(transform.position, player.transform.position) < 1)
         {
-            agent.SetDestination(player.transform.position);
-            if (Vector3.Distance(transform.position, player.transform.position) < 1)
-            {
-                //oyunu bitir
-            }
+            //oyunu bitir
         }
 
         if (goingToDoor)
@@ -108,13 +104,18 @@ public class DemonMaskBehaviour : MonoBehaviour
         if (goingToHall)
         {
             agent.SetDestination(hallPosition.position);
+            timer = 0;
+        }
+        if (chasePlayer)
+        {
+            agent.SetDestination(player.transform.position);
         }
     }
 
     IEnumerator GoBack()
     {
         yield return new WaitForSeconds(1);
-        agent.SetDestination(hallPosition.position);
+        goingToHall = true; goingToDoor = false; goingToRoom = false;
     }
 
 }

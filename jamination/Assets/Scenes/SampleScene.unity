@@ -14489,7 +14489,7 @@ GameObject:
   - component: {fileID: 2138565845}
   m_Layer: 9
   m_Name: "Kap\u0131Cube"
-  m_TagString: Untagged
+  m_TagString: "Kap\u0131"
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15377,10 +15377,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AnimDoor: {fileID: 2138565845}
-  DoorCheck: 0
+  door: {fileID: 0}
   hallPosition: {fileID: 0}
   doorPosition: {fileID: 0}
   roomPosition: {fileID: 0}
+  goingToRoom: 0
+  goingToDoor: 0
+  goingToHall: 0
 --- !u!195 &2093988048188486870
 NavMeshAgent:
   m_ObjectHideFlags: 0

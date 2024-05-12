@@ -9,6 +9,8 @@ public class DemonMaskBehaviour : MonoBehaviour
 {
     private GameObject player;
     private NavMeshAgent agent;
+    public Animator AnimDoor;
+    public bool DoorCheck;
 
     [Header("Position")]
     [SerializeField] private Transform hallPosition;
@@ -33,29 +35,32 @@ public class DemonMaskBehaviour : MonoBehaviour
 
     IEnumerator GoToDoor()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(20);
         agent.SetDestination(doorPosition.position);
     }
 
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(Vector3.Distance(transform.position, doorPosition.transform.position));
+        DoorCheck = AnimDoor.GetBool("DoorBool");
+
         if (agent != null)
         {
-            if (Vector3.Distance(transform.position, doorPosition.transform.position) < 2)
+            if (Vector3.Distance(transform.position, doorPosition.transform.position) < 30 )
             {
                 //eðer kapý açýk deðilse
-                if (DoorScript.Kapý == false)
+                if (DoorCheck)
                 {
                     StartCoroutine(GoToRoom());
                 }
                 else
                 {
-                    Destroy(gameObject, 3f);
+                   
                 }
             }
 
-            if (Vector3.Distance(transform.position, roomPosition.transform.position) < 2)
+            if (Vector3.Distance(transform.position, roomPosition.transform.position) < 1)
             {
                 //player dolapta deðilse
                 if(!GameObject.Find("Kapak").GetComponent<WardrobeScript>().isPlayerInside)
@@ -81,13 +86,13 @@ public class DemonMaskBehaviour : MonoBehaviour
 
     IEnumerator GoToRoom()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(1);
         agent.SetDestination(roomPosition.position);
     }
 
     IEnumerator GoBack()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(1);
         agent.SetDestination(hallPosition.position);
         if(agent != null)
         {

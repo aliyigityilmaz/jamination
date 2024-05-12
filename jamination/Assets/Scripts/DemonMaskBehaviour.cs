@@ -120,6 +120,7 @@ public class DemonMaskBehaviour : MonoBehaviour
         }
         if (chasePlayer)
         {
+            agent.speed = 8;    
             agent.SetDestination(player.transform.position);
         }
     }

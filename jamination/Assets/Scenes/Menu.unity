@@ -829,7 +829,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: BASLA
+  m_text: 'START
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 62cfed8d429a9084d9e94c107a03649e, type: 2}
   m_sharedMaterial: {fileID: 8702695526699245660, guid: 62cfed8d429a9084d9e94c107a03649e,

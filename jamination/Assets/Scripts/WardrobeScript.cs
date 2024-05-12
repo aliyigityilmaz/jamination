@@ -20,19 +20,13 @@ public class WardrobeScript : Interactable
     void Update()
     {
 
-        if(Kapak == true)
-        {
-            OpenAnim.SetBool("DolapBool", false);
-        }
-
     }
 
     public override void OnInteract()
     {
-        OpenAnim.SetBool("DolapBool", true);
-        Kapak = true;
-        player.isStatic = true;
         player.transform.position = InWardrob;
+        player.isStatic = true;
+        
 
     }
 
@@ -54,7 +48,8 @@ public class WardrobeScript : Interactable
 
     public override void OnFocus()
     {
-
+        OpenAnim.SetBool("DolapBool", true);
+        Kapak = true;
     }
 
     public override void OnHoldInteract()
@@ -64,6 +59,10 @@ public class WardrobeScript : Interactable
 
     public override void OnLoseFocus()
     {
+        if (Kapak == true)
+        {
+            OpenAnim.SetBool("DolapBool", false);
+        }
 
     }
 }

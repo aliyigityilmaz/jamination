@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class Flashlight : MonoBehaviour
 {
+    public static Flashlight instance;
     public GameObject flashlight;
 
     [Header("Audio")]
@@ -21,12 +22,13 @@ public class Flashlight : MonoBehaviour
     [Header("Battery")]
     public float maxBatteryLevel = 100f;
     public float batteryDrainRate = 0.5f; // Birim: birim/saniye
-    private float currentBatteryLevel;
+    public float currentBatteryLevel;
 
     public Image batteryIndicator;
 
     void Start()
     {
+        instance = this;
         isOff = true;
         flashlight.SetActive(false);
 
@@ -68,5 +70,15 @@ public class Flashlight : MonoBehaviour
     {
         float fillAmount = currentBatteryLevel / maxBatteryLevel;
         batteryIndicator.fillAmount = fillAmount;
+    }
+
+    public void ChargeBattery(float amount)
+    {
+        currentBatteryLevel += amount;
+        if (currentBatteryLevel > maxBatteryLevel)
+        {
+            currentBatteryLevel = maxBatteryLevel;
+        }
+        UpdateBatteryIndicator();
     }
 }

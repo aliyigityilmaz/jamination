@@ -8,6 +8,8 @@ public class DoorScript : Interactable
 
     public bool isOpened;
 
+    public AudioSource openSound;
+    public AudioSource closeSound;
     private void Start()
     {
         DoorAnim = GetComponent<Animator>();
@@ -26,6 +28,7 @@ public class DoorScript : Interactable
         {
             DoorAnim.SetBool("DoorBool", false);
             isOpened = false;
+            
         }
 
     }
@@ -43,6 +46,14 @@ public class DoorScript : Interactable
     public override void OnInteract()
     {
         isOpened = !isOpened;
+        if (isOpened)
+        {
+            openSound.Play();
+        }
+        else
+        {
+            closeSound.Play();
+        }
     }
 
     public override void OnLoseFocus()

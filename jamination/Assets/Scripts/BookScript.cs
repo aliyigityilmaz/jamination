@@ -39,6 +39,7 @@ public class BookScript : Interactable
             Menüler.instance.playerWin = true;
             Debug.Log("Book is read");
         }
+        AkilSagligi.instance.akilSagligiBar.fillAmount -= 0.03f * Time.deltaTime;
     }
 
     public override void OnLoseFocus()

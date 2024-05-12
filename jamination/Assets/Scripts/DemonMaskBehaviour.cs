@@ -25,6 +25,10 @@ public class DemonMaskBehaviour : MonoBehaviour
     public bool goingToRoom;
     public bool goingToDoor;
     public bool goingToHall;
+    
+    
+    public AudioSource demonSound;
+    public AudioSource hallSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -56,41 +60,49 @@ public class DemonMaskBehaviour : MonoBehaviour
         if (AnimDoor.GetBool("DoorBool") == true)
         {
             goingToDoor = true; goingToHall = false; goingToRoom = false;
-            if (Vector3.Distance(this.gameObject.transform.position, doorPosition.transform.position) < 3)
-            {
-                
-                timer += Time.deltaTime;
-                Debug.Log(timer);
-                if (timer > 5)
-                {
-                    goingToRoom = true; goingToDoor = false; goingToHall = false;
-                    
-                }
-            }
+            GetReadyToEnter();
         }
-        else
+        else if(AnimDoor.GetBool("DoorBool") == false && goingToDoor == false)
         {
             goingToHall = true; goingToDoor = false; goingToRoom = false;
             door.GetComponent<DoorScript>().isOpened = false;
         }
 
-        if (Vector3.Distance(transform.position, roomPosition.transform.position) < 2)
+        if (AnimDoor.GetBool("DoorBool") == false && goingToDoor == true)
+        {
+            if (Vector3.Distance(this.gameObject.transform.position, doorPosition.transform.position) < 2)
+            {
+                
+                door.GetComponent<DoorScript>().openSound.Play();
+                door.GetComponent<DoorScript>().isOpened = true;
+            }
+        }
+
+        if (Vector3.Distance(transform.position, roomPosition.transform.position) < 2 && goingToRoom)
         {
            timer = 0;
             //player dolapta deðilse
             if (!GameObject.Find("Kapak").GetComponent<WardrobeScript>().isPlayerInside)
             {
+                demonSound.Play();
                 chasePlayer = true; goingToRoom = false; goingToDoor = false; goingToHall = false;
             }
             else if (GameObject.Find("Kapak").GetComponent<WardrobeScript>().isPlayerInside && chasePlayer == false)
             {
                 StartCoroutine(GoBack());
+                hallSound.Play();
                 door.GetComponent<DoorScript>().isOpened = false;
+                door.GetComponent<DoorScript>().closeSound.Play();
             }
         }
         if (Vector3.Distance(transform.position, player.transform.position) < 2)
         {
             Menüler.instance.playerLost = true;
+        }
+
+        if (Vector3.Distance(transform.position, hallPosition.transform.position) < 2)
+        {
+            goingToRoom = false; goingToDoor = true; goingToHall = false;
         }
 
         if (goingToDoor)
@@ -109,6 +121,22 @@ public class DemonMaskBehaviour : MonoBehaviour
         if (chasePlayer)
         {
             agent.SetDestination(player.transform.position);
+        }
+    }
+
+    private void GetReadyToEnter()
+    {
+        if (Vector3.Distance(this.gameObject.transform.position, doorPosition.transform.position) < 3)
+        {
+
+            timer += Time.deltaTime;
+            Debug.Log(timer);
+            if (timer >= 5)
+            {
+                goingToRoom = true; goingToDoor = false; goingToHall = false;
+                Debug.Log("Entered");
+
+            }
         }
     }
 

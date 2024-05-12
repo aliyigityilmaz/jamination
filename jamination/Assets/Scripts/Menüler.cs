@@ -12,9 +12,13 @@ public class Menüler : MonoBehaviour
 
     public GameObject loseMenu;
     public GameObject winMenu;
+
+    public GameObject tutorial;
+    public float timer;
     // Start is called before the first frame update
     void Start()
     {
+        timer = 0;
         instance = this;
         loseMenu.SetActive(false);
         winMenu.SetActive(false);
@@ -36,6 +40,16 @@ public class Menüler : MonoBehaviour
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
                winMenu.SetActive(true);
+        }
+
+        if (tutorial.activeSelf)
+        {
+            timer += Time.deltaTime;
+            if (timer >= 5)
+            {
+                tutorial.SetActive(false);
+                timer = 0;
+            }
         }
     }
 

@@ -4346,7 +4346,7 @@ Transform:
   m_GameObject: {fileID: 613801867}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 23.288, y: -15.56128, z: 4.037}
+  m_LocalPosition: {x: 23.288, y: -15.56128, z: 5.537}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8176,7 +8176,7 @@ Transform:
   m_GameObject: {fileID: 1208234793}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 17.63, y: -16.5, z: -1.577}
+  m_LocalPosition: {x: 23.13, y: -16.5, z: 2.1729999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14615,6 +14615,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoorAnim: {fileID: 2138565845}
+  isOpened: 0
 --- !u!1 &2141848244
 GameObject:
   m_ObjectHideFlags: 0

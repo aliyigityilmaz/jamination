@@ -5,18 +5,29 @@ using UnityEngine;
 public class DoorScript : Interactable
 {
     public Animator DoorAnim;
-    
+
+    public bool isOpened;
+
+    private void Start()
+    {
+        DoorAnim = GetComponent<Animator>();
+        isOpened = false;
+        DoorAnim.SetBool("DoorBool", false);
+    }
 
     public override void Update()
     {
-        
+        if (isOpened)
+        {
+            DoorAnim.SetBool("DoorBool", true);
+            isOpened = true;
+        }
+        else
+        {
+            DoorAnim.SetBool("DoorBool", false);
+            isOpened = false;
+        }
 
-    }
-
-    IEnumerator KapýSure()
-    {
-      yield return new WaitForSeconds(3);
-       DoorAnim.SetBool("DoorBool", false);
     }
 
     public override void OnFocus()
@@ -31,10 +42,7 @@ public class DoorScript : Interactable
 
     public override void OnInteract()
     {
-        Debug.Log("kapýokokok");
-        DoorAnim.SetBool("DoorBool", true);
-        StartCoroutine("KapýSure");
-
+        isOpened = !isOpened;
     }
 
     public override void OnLoseFocus()

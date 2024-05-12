@@ -88,9 +88,9 @@ public class DemonMaskBehaviour : MonoBehaviour
                 door.GetComponent<DoorScript>().isOpened = false;
             }
         }
-        if (Vector3.Distance(transform.position, player.transform.position) < 1)
+        if (Vector3.Distance(transform.position, player.transform.position) < 2)
         {
-            //oyunu bitir
+            Menüler.instance.playerLost = true;
         }
 
         if (goingToDoor)

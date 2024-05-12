@@ -36,6 +36,7 @@ public class BookScript : Interactable
         progressBar.fillAmount += 0.05f * Time.deltaTime;
         if (progressBar.fillAmount >= 1)
         {
+            Menüler.instance.playerWin = true;
             Debug.Log("Book is read");
         }
     }

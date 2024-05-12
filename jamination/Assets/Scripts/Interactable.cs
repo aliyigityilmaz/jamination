@@ -4,7 +4,10 @@ using UnityEngine;
 
 public abstract class Interactable : MonoBehaviour
 {
- 
+    public virtual void Update()
+    {
+
+    }
 
     public virtual void Awake()
     {

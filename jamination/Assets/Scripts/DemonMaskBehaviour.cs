@@ -42,10 +42,10 @@ public class DemonMaskBehaviour : MonoBehaviour
     {
         if (agent != null)
         {
-            if (Vector3.Distance(transform.position, doorPosition.transform.position) < 1)
+            if (Vector3.Distance(transform.position, doorPosition.transform.position) < 2)
             {
                 //eðer kapý açýk deðilse
-                if (true)
+                if (DoorScript.Kapý == false)
                 {
                     StartCoroutine(GoToRoom());
                 }
@@ -55,7 +55,7 @@ public class DemonMaskBehaviour : MonoBehaviour
                 }
             }
 
-            if (Vector3.Distance(transform.position, roomPosition.transform.position) < 1)
+            if (Vector3.Distance(transform.position, roomPosition.transform.position) < 2)
             {
                 //player dolapta deðilse
                 if(!GameObject.Find("Kapak").GetComponent<WardrobeScript>().isPlayerInside)

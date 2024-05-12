@@ -25,7 +25,7 @@ public class WardrobeScript : Interactable
     public override void OnInteract()
     {
         player.transform.position = InWardrob;
-        player.isStatic = true;
+        //player.isStatic = true;
         
 
     }
